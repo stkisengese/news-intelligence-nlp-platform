@@ -30,6 +30,37 @@ class NewsScraper:
         # create data directory if it doesn't exist
         os.makedirs(self.data_dir, exist_ok=True)
 
+    def get_article_links(self, category_url, max_links=50):
+        """fetch article links from a category page."""
+
+        try:
+            print(f"Fetching article links from category: {category_url}")
+            response = requests.get(category_url, headers=self.headers, timeout=10)
+            response.raise_for_status()
+            soup = BeautifulSoup(response.content, 'html.parser')
+            links = []
+
+            # Find article links
+            for link in soup.find_all('a', href=True):
+                href = link['href']
+                
+                # BBC News article pattern
+                if '/news/articles/' in href or ('/news/' in href and len(href.split('/')) > 4):
+                    full_url = urljoin(self.base_url, href)
+
+                    # Avoid duplicates
+                    if (full_url not in self.scraped_urls and full_url not in links and
+                        'video' not in full_url.lower() and 'live' not in full_url.lower()):
+                        links.append(full_url)
+
+                        if len(links) >= max_links:
+                            break
+
+            return links
+        except requests.exceptions.RequestException as e:
+            print(f"Error fetching category page {category_url}: {e}")
+            return []
+
     def scrape(self, target_count=300, categories=None):
         """Main method to start scraping articles."""
         if categories is None:
