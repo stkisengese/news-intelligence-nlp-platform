@@ -1,6 +1,6 @@
 # NLP-Enriched News Intelligence Platform - GitHub Issues
 
-This document contains all GitHub issues for the NLP-enriched News Intelligence Platform project, ready to be created in your repository.
+This document contains all GitHub issues for the NLP-enriched News Intelligence Platform project created in project repository.
 
 ---
 
@@ -43,13 +43,13 @@ The project requires NLP libraries (spaCy, NLTK), web scraping tools (BeautifulS
 - `.gitignore` configured for Python projects
 
 ### Acceptance Criteria
-- [ ] All directories (`data/`, `results/`) are created
-- [ ] `requirements.txt` includes all specified dependencies with version constraints
-- [ ] Virtual environment can be created and all packages install without errors
+- [x] All directories (`data/`, `results/`) are created
+- [x] `requirements.txt` includes all specified dependencies with version constraints
+- [x] Virtual environment can be created and all packages install without errors
 - [ ] spaCy English model (`en_core_web_sm`) is downloaded successfully
 - [ ] NLTK required datasets (vader_lexicon, punkt) are downloaded
-- [ ] README.md contains project title, brief description, and setup instructions
-- [ ] `.gitignore` excludes `data/`, `results/`, `__pycache__/`, `*.pyc`, virtual environment folders
+- [x] README.md contains project title, brief description, and setup instructions
+- [x] `.gitignore` excludes `data/`, `results/`, `__pycache__/`, `*.pyc`, virtual environment folders
 
 ---
 
