@@ -30,6 +30,40 @@ class NewsScraper:
         # create data directory if it doesn't exist
         os.makedirs(self.data_dir, exist_ok=True)
 
+    def scrape_article(self, url):
+        """Scrape a single article given its URL."""
+        
+        try:
+            print(f"\n{self.articles_scraped + 1}. scraping {url}")
+            print("    requesting ...")
+            
+            response = requests.get(url, headers=self.headers, timeout=10)
+            response.raise_for_status()
+            
+            print("    parsing ...")
+            soup = BeautifulSoup(response.content, 'html.parser')
+            
+            # Extract headline
+            headline = None
+            headline_tag = soup.find('h1')
+            if headline_tag:
+                headline = headline_tag.get_text(strip=True)
+            
+            # Extract article body
+            body_paragraphs = []
+            
+           
+            
+            self.scraped_urls.add(url)
+            return article
+            
+        except requests.exceptions.RequestException as e:
+            print(f"    Error requesting page: {e}")
+            return None
+        except Exception as e:
+            print(f"    Error parsing article: {e}")
+            return None
+
     def get_article_links(self, category_url, max_links=50):
         """fetch article links from a category page."""
 
