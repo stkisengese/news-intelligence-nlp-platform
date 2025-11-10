@@ -1,0 +1,191 @@
+The goal of this project is to build an NLP-enriched News Intelligence platform. News analysis is a trending and important topic. The analysts get their information from the news and the amount of available information is limitless. Having a platform that helps to detect the relevant information is definitely valuable.
+
+The platform connects to a news data source, detects the entities, detects the topic of the article, analyses the sentiment and performs a scandal detection analysis.
+Role Play
+
+You're a Natural Language Processing (NLP) specialist at a tech startup developing a sentiment analysis tool for social media posts. Your task is to build the preprocessing pipeline and create a bag-of-words representation for tweet analysis.
+Learning Objectives
+
+    Set up an NLP-focused Python environment
+
+    Implement basic text preprocessing techniques (lowercase, punctuation removal)
+
+    Perform text tokenization at sentence and word levels
+
+    Remove stop words from text data
+
+    Apply stemming to reduce words to their root forms
+
+    Create a complete text preprocessing pipeline
+
+    Implement a bag-of-words model using CountVectorizer
+
+    Analyze word frequency in a corpus of tweets
+
+    Prepare a labeled dataset for sentiment analysis
+
+Instructions
+Scraper
+
+News data source:
+
+    Find a news website that is easy to scrape. I could have chosen the website, but the news' websites change their scraping policy frequently.
+
+    Store the following information either in one file per day or in a SQL database:
+
+        unique ID,
+
+        URL,
+
+        date,
+
+        headline,
+
+        body of the article.
+
+Use data from the last week otherwise the volume may be too high.
+
+There should be at least 300 articles stored in your file system or SQL database.
+NLP engine
+
+In production architectures, the NLP engine delivers a live output based on the news that are delivered in a live stream data by the scraper. However, it required advanced Python skills that is not a requisite for the AI branch. To simplify this step the scraper and the NLP engine are used independently in the project. The scraper fetches the news and store them in the data structure (either the file system or the SQL database) and then, the NLP engine runs on the stored data.
+
+Here how the NLP engine should process the news:
+1. Entities detection:
+
+The goal is to detect all the entities in the document (headline and body). The type of entity we focus on is ORG. This corresponds to companies and organizations. This information should be stored.
+
+    Detect all companies using SpaCy NER on the body of the text.
+
+Named Entity Recognition with NLTK and SpaCy
+2. Topic detection:
+
+The goal is to detect what the article is dealing with: Tech, Sport, Business, Entertainment or Politics. To do so, a labelled dataset is provided: training data and test data. From this dataset, build a classifier that learns to detect the right topic in the article. Save the training process to a python file because the audit requires the auditor to test the model. To proceed with the following instructions, save the model as topic_classifier.pkl.
+
+Save the plot of learning curves (learning_curves.png) in results to prove that the model is trained correctly and not overfitted.
+
+    Learning constraints: Score on test: > 95%
+
+3. Sentiment analysis:
+
+The goal is to detect the sentiment (positive, negative or neutral) of the news articles. To do so, use a pre-trained sentiment model. I suggest to use: NLTK. There are 3 reasons for which we use a pre-trained model:
+
+    As a Data Scientist, you should learn to use a pre-trained model. There are so many models available and trained that sometimes you don't need to train one from scratch.
+
+    Labelled news data for sentiment analysis are very expensive. Companies as SESAMm provide this kind of services.
+
+    Sentiment analysis
+
+4. Scandal detection
+
+The goal is to detect environmental disaster for the detected companies. Here is the methodology that should be used:
+
+    Define keywords that correspond to environmental disaster that may be caused by companies: pollution, deforestation etc ... Here is an example of disaster we want to detect. Pay attention to not use ambiguous words that make sense in the context of an environmental disaster but also in another context. This would lead to detect a false positive natural disaster.
+
+    Compute the embeddings of the keywords.
+
+    Compute the distance (here some examples) between the embeddings of the keywords and all sentences that contain an entity. Explain in the README.md the embeddings chosen and why. Similarly explain the distance or similarity chosen and why.
+
+    Save a metric to unify all the distances calculated per article.
+
+    Flag the top 10 articles.
+
+5. Source analysis (optional)
+
+The goal is to show insights about the news' source you scraped. This requires to scrap data on at least 5 days (a week ideally). Save the plots in the results folder.
+
+Here are examples of insights:
+
+    Per day:
+
+        Proportion of topics per day
+
+        Number of articles
+
+        Number of companies mentioned
+
+        Sentiment per day
+
+    Per companies:
+
+        Companies mentioned the most
+
+        Sentiment per companies
+
+Project repository structure:
+
+The expected structure of the project is:
+project
+.
+├── data
+│   └── ...
+├── nlp_enriched_news.py
+├── requirements.txt
+├── README.md
+├── results
+│   ├── training_model.py
+│   ├── enhanced_news.csv
+│   └── learning_curves.png
+└── scraper_news.py
+
+    Run the scraper until it fetches at least 300 articles
+
+python scraper_news.py
+
+1. scraping <URL>
+        requesting ...
+        parsing ...
+        saved in <path>
+
+2. scraping <URL>
+        requesting ...
+        parsing ...
+        saved in <path>
+
+    Run on these 300 articles the NLP engine. The script nlp_eneriched_news.py should:
+
+        Save a DataFrame with the following struct and store the result in a csv file, enhancend_news.csv:
+    Unique ID (`uuid` or `int`)
+    URL (`str`)
+    Date scraped (`date`)
+    Headline (`str`)
+    Body (`str`)
+    Org (`list str`)
+    Topics (`list str`)
+    Sentiment (`list float` or `float`)
+    Scandal_distance (`float`)
+    Top_10 (`bool`)
+
+        Have a similar output while it process the articles
+    python nlp_enriched_news.py
+
+    Enriching <URL>:
+
+    Cleaning document ... (optional)
+
+    ---------- Detect entities ----------
+
+    Detected <X> companies which are <company_1> and <company_2>
+
+    ---------- Topic detection ----------
+
+    Text preprocessing ...
+
+    The topic of the article is: <topic>
+
+    ---------- Sentiment analysis ----------
+
+    Text preprocessing ... (optional)
+    The article <title> has a <sentiment> sentiment
+
+    ---------- Scandal detection ----------
+
+    Computing embeddings and distance ...
+
+    Environmental scandal detected for <entity>
+
+Resources
+
+    Web Scraping
+
+    Sentiment analysis
