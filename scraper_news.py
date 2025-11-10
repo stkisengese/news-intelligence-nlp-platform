@@ -52,7 +52,38 @@ class NewsScraper:
             # Extract article body
             body_paragraphs = []
             
-           
+            # BBC News specific selectors for article content
+            article_body = soup.find('article')
+            if article_body:
+                paragraphs = article_body.find_all('p')
+                for p in paragraphs:
+                    text = p.get_text(strip=True)
+                    if len(text) > 30:  # Filter out short text snippets
+                        body_paragraphs.append(text)
+            
+            # Fallback: try to find all paragraphs
+            if not body_paragraphs:
+                paragraphs = soup.find_all('p')
+                for p in paragraphs:
+                    text = p.get_text(strip=True)
+                    if len(text) > 30:
+                        body_paragraphs.append(text)
+            
+            body = ' '.join(body_paragraphs)
+            
+            # Validate article has minimum content
+            if not headline or len(body) < 100:
+                print(f"    Skipping: Insufficient content")
+                return None
+            
+            # Create article data structure
+            article = {
+                'unique_id': str(uuid.uuid4()),
+                'url': url,
+                'date': datetime.now().strftime('%Y-%m-%d'),
+                'headline': headline,
+                'body': body
+            }
             
             self.scraped_urls.add(url)
             return article
