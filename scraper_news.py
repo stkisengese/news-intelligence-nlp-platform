@@ -30,6 +30,21 @@ class NewsScraper:
         # create data directory if it doesn't exist
         os.makedirs(self.data_dir, exist_ok=True)
 
+    def save_article(self, article):
+        """Save the article data to a JSON file."""
+        
+        # Create date-based directory
+        date_dir = os.path.join(self.data_dir, article['date'])
+        os.makedirs(date_dir, exist_ok=True)
+
+        # save article as JSON file
+        filepath = os.path.join(date_dir, f"{article['unique_id']}.json")
+        with open(filepath, 'w', encoding='utf-8') as f:
+            json.dump(article, f, ensure_ascii=False, indent=2)
+
+        print(f"    saved article: {filepath}")
+        self.articles_scraped += 1
+
     def scrape_article(self, url):
         """Scrape a single article given its URL."""
         
