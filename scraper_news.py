@@ -30,16 +30,16 @@ class NewsScraper:
         os.makedirs(self.data_dir, exist_ok=True)
 
     def save_article(self, article):
-        """Save the article data to a JSON file."""
+        """Save the article data to a date-based JSON lines file."""
         
-        # Create date-based directory
-        date_dir = os.path.join(self.data_dir, article['date'])
-        os.makedirs(date_dir, exist_ok=True)
+        # Create date-based filename
+        date_str = article['date']
+        filepath = os.path.join(self.data_dir, f"{date_str}.jsonl")
 
-        # save article as JSON file
-        filepath = os.path.join(date_dir, f"{article['unique_id']}.json")
-        with open(filepath, 'w', encoding='utf-8') as f:
-            json.dump(article, f, ensure_ascii=False, indent=2)
+        # save article as a new line in the JSON file
+        with open(filepath, 'a', encoding='utf-8') as f:
+            json.dump(article, f, ensure_ascii=False)
+            f.write('\n')
 
         print(f"    saved article: {filepath}")
         self.articles_scraped += 1
@@ -154,8 +154,8 @@ class NewsScraper:
                 "https://www.bbc.com/news/world/middle_east",
                 "https://www.bbc.com/news/world/australia",
                 "https://www.bbc.com/news/world/asia",
-                "https://www.bbc.com/news/europe",
-                "https://www.bbc.com/news/world/us-canada",
+                "https://www.bbc.com/news/world/europe",
+                "https://www.bbc.com/news/us-canada",
                 "https://www.bbc.com/news/world/africa",
                 "https://www.bbc.com/news/uk",
                 "https://www.bbc.com/culture",
