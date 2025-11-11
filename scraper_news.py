@@ -9,16 +9,15 @@ from bs4 import BeautifulSoup
 import time
 import json
 import os
-from datetime import datetime, timedelta
+from datetime import datetime
 from urllib.parse import urljoin, urlparse
 import uuid
-import logging
 import random
 
 class NewsScraper:
     """A web scraper for news articles from BBC News."""
 
-    def __init__(self, base_url="Https://www.bbc.com/news", data_dir="scraped_news"):
+    def __init__(self, base_url="Https://www.bbc.com", data_dir="scraped_news"):
         self.base_url = base_url
         self.data_dir = data_dir
         self.headers = {
@@ -56,7 +55,7 @@ class NewsScraper:
             response.raise_for_status()
             
             print("    parsing ...")
-            soup = BeautifulSoup(response.content, 'html.parser')
+            soup = BeautifulSoup(response.content, 'lxml')
             
             # Extract headline
             headline = None
@@ -110,7 +109,7 @@ class NewsScraper:
             print(f"    Error parsing article: {e}")
             return None
 
-    def get_article_links(self, category_url, max_links=50):
+    def get_article_links(self, category_url, max_links=100):
         """fetch article links from a category page."""
 
         try:
@@ -146,13 +145,13 @@ class NewsScraper:
         if categories is None:
             categories = [
                 "https://www.bbc.com/news",
-                "https://www.bbc.com/news/business",
-                "https://www.bbc.com/news/technology",
+                "https://www.bbc.com/business",
+                "https://www.bbc.com/innovation/technology",
                 "https://www.bbc.com/news/world",
                 "https://www.bbc.com/news/uk",
-                "https://www.bbc.com/news/science-environment",
-                "https://www.bbc.com/news/health",
-                "https://www.bbc.com/news/entertainment_and_arts",
+                "https://www.bbc.com/culture",
+                "https://www.bbc.com/arts",
+                "https://www.bbc.com/future-planet",
                 "https://www.bbc.com/sport"    
             ]
 
