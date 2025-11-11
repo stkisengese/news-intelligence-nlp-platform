@@ -46,8 +46,8 @@ The project requires NLP libraries (spaCy, NLTK), web scraping tools (BeautifulS
 - [x] All directories (`data/`, `results/`) are created
 - [x] `requirements.txt` includes all specified dependencies with version constraints
 - [x] Virtual environment can be created and all packages install without errors
-- [ ] spaCy English model (`en_core_web_sm`) is downloaded successfully
-- [ ] NLTK required datasets (vader_lexicon, punkt) are downloaded
+- [x] spaCy English model (`en_core_web_sm`) is downloaded successfully
+- [x] NLTK required datasets (vader_lexicon, punkt) are downloaded
 - [x] README.md contains project title, brief description, and setup instructions
 - [x] `.gitignore` excludes `data/`, `results/`, `__pycache__/`, `*.pyc`, virtual environment folders
 
@@ -86,14 +86,14 @@ Key implementation considerations:
 - At least 300 articles scraped and stored
 
 ### Acceptance Criteria
-- [ ] Scraper successfully identifies and extracts articles from chosen news website
-- [ ] Each article contains: unique_id, url, date, headline, body
-- [ ] Script handles HTTP errors gracefully (404, 503, timeouts)
-- [ ] Implements polite scraping (1-2 second delay between requests)
-- [ ] Console output shows scraping progress as specified
-- [ ] Successfully scrapes minimum 300 articles from past week
-- [ ] Article dates are parsed correctly and stored in consistent format
-- [ ] No duplicate articles are stored (based on URL uniqueness)
+- [x] Scraper successfully identifies and extracts articles from chosen news website
+- [x] Each article contains: unique_id, url, date, headline, body
+- [x] Script handles HTTP errors gracefully (404, 503, timeouts)
+- [x] Implements polite scraping (1-2 second delay between requests)
+- [x] Console output shows scraping progress as specified
+- [x] Successfully scrapes minimum 300 articles from past week
+- [x] Article dates are parsed correctly and stored in consistent format
+- [x] No duplicate articles are stored (based on URL uniqueness)
 
 ---
 
