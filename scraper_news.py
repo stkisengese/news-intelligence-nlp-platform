@@ -17,7 +17,7 @@ import random
 class NewsScraper:
     """A web scraper for news articles from BBC News."""
 
-    def __init__(self, base_url="Https://www.bbc.com", data_dir="scraped_news"):
+    def __init__(self, base_url="Https://www.bbc.com", data_dir="data"):
         self.base_url = base_url
         self.data_dir = data_dir
         self.headers = {
@@ -124,7 +124,8 @@ class NewsScraper:
                 href = link['href']
                 
                 # BBC News article pattern
-                if '/news/articles/' in href or ('/news/' in href and len(href.split('/')) > 4):
+                if '/news/articles/' in href or ('/news/' in href and 
+                len(href.split('/')) > 4) or ('/sport/' in href and len(href.split('/')) > 3):
                     full_url = urljoin(self.base_url, href)
 
                     # Avoid duplicates
@@ -169,7 +170,7 @@ class NewsScraper:
                 "https://www.bbc.com/future-planet/solutions",
                 "https://www.bbc.com/future-planet/green-living",
                 "http://bbc.com/sport/cycling",
-                "http://bbc.com/sport/cycling",
+                "http://bbc.com/sport/cricket",
                 "https://www.bbc.com/sport"    
             ]
 
