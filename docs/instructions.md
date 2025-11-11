@@ -1,3 +1,4 @@
+# NLP SCRAPER
 The goal of this project is to build an NLP-enriched News Intelligence platform. News analysis is a trending and important topic. The analysts get their information from the news and the amount of available information is limitless. Having a platform that helps to detect the relevant information is definitely valuable.
 
 The platform connects to a news data source, detects the entities, detects the topic of the article, analyses the sentiment and performs a scandal detection analysis.
@@ -24,8 +25,8 @@ Learning Objectives
 
     Prepare a labeled dataset for sentiment analysis
 
-Instructions
-Scraper
+# Instructions
+## Scraper
 
 News data source:
 
@@ -46,7 +47,8 @@ News data source:
 Use data from the last week otherwise the volume may be too high.
 
 There should be at least 300 articles stored in your file system or SQL database.
-NLP engine
+
+## NLP engine
 
 In production architectures, the NLP engine delivers a live output based on the news that are delivered in a live stream data by the scraper. However, it required advanced Python skills that is not a requisite for the AI branch. To simplify this step the scraper and the NLP engine are used independently in the project. The scraper fetches the news and store them in the data structure (either the file system or the SQL database) and then, the NLP engine runs on the stored data.
 
@@ -112,9 +114,11 @@ Here are examples of insights:
 
         Sentiment per companies
 
-Project repository structure:
+## Project repository structure:
 
 The expected structure of the project is:
+
+```bash
 project
 .
 ├── data
@@ -127,9 +131,11 @@ project
 │   ├── enhanced_news.csv
 │   └── learning_curves.png
 └── scraper_news.py
+```
 
-    Run the scraper until it fetches at least 300 articles
+ 1.  Run the scraper until it fetches at least 300 articles
 
+```bash
 python scraper_news.py
 
 1. scraping <URL>
@@ -141,10 +147,13 @@ python scraper_news.py
         requesting ...
         parsing ...
         saved in <path>
+```
 
-    Run on these 300 articles the NLP engine. The script nlp_eneriched_news.py should:
+   2. Run on these 300 articles the NLP engine. The script nlp_eneriched_news.py should:
 
-        Save a DataFrame with the following struct and store the result in a csv file, enhancend_news.csv:
+        - Save a DataFrame with the following struct and store the result in a csv file, enhancend_news.csv:
+
+```
     Unique ID (`uuid` or `int`)
     URL (`str`)
     Date scraped (`date`)
@@ -155,8 +164,11 @@ python scraper_news.py
     Sentiment (`list float` or `float`)
     Scandal_distance (`float`)
     Top_10 (`bool`)
+```
 
-        Have a similar output while it process the articles
+        - Have a similar output while it process the articles
+
+```python
     python nlp_enriched_news.py
 
     Enriching <URL>:
@@ -183,8 +195,9 @@ python scraper_news.py
     Computing embeddings and distance ...
 
     Environmental scandal detected for <entity>
+```
 
-Resources
+## Resources
 
     Web Scraping
 
