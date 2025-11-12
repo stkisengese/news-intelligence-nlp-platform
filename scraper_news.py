@@ -124,9 +124,15 @@ class NewsScraper:
                 href = link['href']
                 
                 # BBC News article pattern
-                if '/news/articles/' in href or ('/news/' in href and 
-                len(href.split('/')) > 4) or ('/sport/' in href and len(href.split('/')) > 3):
-                    full_url = urljoin(self.base_url, href)
+                # Normalize: remove fragment (#...) and query (?...) for matching
+                from urllib.parse import urldefrag, urlparse
+                clean_href, _ = urldefrag(href)  # removes #fragment
+                parsed = urlparse(clean_href)
+                clean_path = parsed.path
+
+                # Only accept URLs that contain '/articles/'
+                if '/articles/' in clean_path:
+                    full_url = urljoin(self.base_url, clean_href)
 
                     # Avoid duplicates
                     if (full_url not in self.scraped_urls and full_url not in links and
