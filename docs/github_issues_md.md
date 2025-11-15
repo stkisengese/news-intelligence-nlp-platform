@@ -165,15 +165,15 @@ Create modular functions that can be selectively applied based on the NLP task r
 - Unit tests demonstrating each function (inline or separate test file)
 
 ### Acceptance Criteria
-- [ ] `clean_text()` successfully removes punctuation and converts to lowercase
-- [ ] `tokenize_sentences()` correctly splits text into sentence list
-- [ ] `tokenize_words()` returns list of word tokens
-- [ ] `remove_stopwords()` filters out NLTK English stopwords
-- [ ] `stem_tokens()` applies stemming algorithm correctly
-- [ ] `preprocess_pipeline()` chains operations with configurable steps
-- [ ] Functions handle empty strings and edge cases gracefully
-- [ ] Code includes docstrings with parameter descriptions and examples
-- [ ] Preprocessing preserves text integrity (no information loss unless intended)
+- [x] `clean_text()` successfully removes punctuation and converts to lowercase
+- [x] `tokenize_sentences()` correctly splits text into sentence list
+- [x] `tokenize_words()` returns list of word tokens
+- [x] `remove_stopwords()` filters out NLTK English stopwords
+- [x] `stem_tokens()` applies stemming algorithm correctly
+- [x] `preprocess_pipeline()` chains operations with configurable steps
+- [x] Functions handle empty strings and edge cases gracefully
+- [x] Code includes docstrings with parameter descriptions and examples
+- [x] Preprocessing preserves text integrity (no information loss unless intended)
 
 ---
 
@@ -551,7 +551,7 @@ All plots should be saved in `results/` folder with descriptive filenames.
 ## Summary
 
 **Total Issues:** 11 (10 required + 1 optional)
-**Completed Issues:** Issue #1, Issue #2, Issue #3
+**Completed Issues:** Issue #1, Issue #2, Issue #3, Issue #4
 
 **Project Timeline:**
 1. Setup & Foundation (Issues #1, #4)
