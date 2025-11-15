@@ -76,6 +76,34 @@ def stem_tokens(tokens, stemmer='porter'):
         return [stemmer.stem(word) for word in tokens]
     return tokens
 
+def preprocess_pipeline(text, steps=['lowercase', 'tokenize', 'remove_stopwords', 'stem']):
+    """
+    Apply a series of preprocessing steps to the text.
+
+    Args:
+        text (str): The input text.
+        steps (list, optional): A list of preprocessing steps to apply.
+            Defaults to ['lowercase', 'tokenize', 'remove_stopwords', 'stem'].
+
+    Returns:
+        list: A list of preprocessed tokens.
+    """
+    if 'lowercase' in steps:
+        text = text.lower()
+    
+    if 'tokenize' in steps:
+        text = clean_text(text)
+        tokens = tokenize_words(text)
+    else:
+        tokens = text.split()
+
+    if 'remove_stopwords' in steps:
+        tokens = remove_stopwords(tokens)
+
+    if 'stem' in steps:
+        tokens = stem_tokens(tokens)
+        
+    return tokens
 
 if __name__ == '__main__':
     # Example usage of the preprocessing pipeline
@@ -109,4 +137,12 @@ if __name__ == '__main__':
     print("\nStemmed Words:")
     print(stemmed_words)
     
- 
+    # 6. Full pipeline
+    processed_tokens = preprocess_pipeline(sample_text)
+    print("\nFull Pipeline Output:")
+    print(processed_tokens)
+    
+    # Example with different pipeline steps
+    processed_tokens_custom = preprocess_pipeline(sample_text, steps=['lowercase', 'tokenize'])
+    print("\nCustom Pipeline (lowercase, tokenize):")
+    print(processed_tokens_custom)
