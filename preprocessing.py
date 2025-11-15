@@ -46,6 +46,20 @@ def tokenize_words(text):
     """
     return word_tokenize(text)
 
+def remove_stopwords(tokens, language='english'):
+    """
+    Remove stopwords from a list of tokens.
+
+    Args:
+        tokens (list): A list of word tokens.
+        language (str, optional): The language of the stopwords. Defaults to 'english'.
+
+    Returns:
+        list: A list of tokens with stopwords removed.
+    """
+    stop_words = set(stopwords.words(language))
+    return [word for word in tokens if word not in stop_words]
+
 
 if __name__ == '__main__':
     # Example usage of the preprocessing pipeline
@@ -69,4 +83,4 @@ if __name__ == '__main__':
     print("\nTokenized Words:")
     print(words)
     
-    
+  
