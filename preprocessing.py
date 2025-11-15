@@ -16,6 +16,8 @@ def clean_text(text, remove_punctuation=True, lowercase=True):
     Returns:
         str: The cleaned text.
     """
+    if not text or not isinstance(text, str):
+        return ""
     if lowercase:
         text = text.lower()
     if remove_punctuation:
@@ -32,6 +34,8 @@ def tokenize_sentences(text):
     Returns:
         list: A list of sentences.
     """
+    if not text or not isinstance(text, str):
+        return []
     return sent_tokenize(text)
 
 def tokenize_words(text):
@@ -44,6 +48,8 @@ def tokenize_words(text):
     Returns:
         list: A list of words.
     """
+    if not text or not isinstance(text, str):
+        return []
     return word_tokenize(text)
 
 def remove_stopwords(tokens, language='english'):
@@ -57,6 +63,8 @@ def remove_stopwords(tokens, language='english'):
     Returns:
         list: A list of tokens with stopwords removed.
     """
+    if not tokens or not isinstance(tokens, list):
+        return []
     stop_words = set(stopwords.words(language))
     return [word for word in tokens if word not in stop_words]
 
@@ -71,6 +79,8 @@ def stem_tokens(tokens, stemmer='porter'):
     Returns:
         list: A list of stemmed tokens.
     """
+    if not tokens or not isinstance(tokens, list):
+        return []
     if stemmer == 'porter':
         stemmer = PorterStemmer()
         return [stemmer.stem(word) for word in tokens]
