@@ -22,6 +22,30 @@ def clean_text(text, remove_punctuation=True, lowercase=True):
         text = text.translate(str.maketrans('', '', string.punctuation))
     return text
 
+def tokenize_sentences(text):
+    """
+    Tokenize the text into sentences.
+
+    Args:
+        text (str): The input text.
+
+    Returns:
+        list: A list of sentences.
+    """
+    return sent_tokenize(text)
+
+def tokenize_words(text):
+    """
+    Tokenize the text into words.
+
+    Args:
+        text (str): The input text.
+
+    Returns:
+        list: A list of words.
+    """
+    return word_tokenize(text)
+
 
 if __name__ == '__main__':
     # Example usage of the preprocessing pipeline
@@ -34,5 +58,15 @@ if __name__ == '__main__':
     cleaned_text = clean_text(sample_text)
     print("\nCleaned Text:")
     print(cleaned_text)
+    
+    # 2. Tokenize sentences
+    sentences = tokenize_sentences(sample_text)
+    print("\nTokenized Sentences:")
+    print(sentences)
+    
+    # 3. Tokenize words
+    words = tokenize_words(cleaned_text)
+    print("\nTokenized Words:")
+    print(words)
     
     
