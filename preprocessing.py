@@ -60,6 +60,22 @@ def remove_stopwords(tokens, language='english'):
     stop_words = set(stopwords.words(language))
     return [word for word in tokens if word not in stop_words]
 
+def stem_tokens(tokens, stemmer='porter'):
+    """
+    Stem a list of tokens.
+
+    Args:
+        tokens (list): A list of word tokens.
+        stemmer (str, optional): The stemmer to use. Defaults to 'porter'.
+
+    Returns:
+        list: A list of stemmed tokens.
+    """
+    if stemmer == 'porter':
+        stemmer = PorterStemmer()
+        return [stemmer.stem(word) for word in tokens]
+    return tokens
+
 
 if __name__ == '__main__':
     # Example usage of the preprocessing pipeline
@@ -83,4 +99,14 @@ if __name__ == '__main__':
     print("\nTokenized Words:")
     print(words)
     
-  
+    # 4. Remove stopwords
+    filtered_words = remove_stopwords(words)
+    print("\nWords after removing stopwords:")
+    print(filtered_words)
+    
+    # 5. Stem tokens
+    stemmed_words = stem_tokens(filtered_words)
+    print("\nStemmed Words:")
+    print(stemmed_words)
+    
+ 
