@@ -124,13 +124,13 @@ The storage solution must support efficient retrieval for the NLP engine and pre
 - Updated `scraper_news.py` to use storage functions
 
 ### Acceptance Criteria
-- [ ] Storage mechanism successfully saves all article fields (unique_id, url, date, headline, body)
-- [ ] No duplicate articles can be stored (enforced by unique_id or URL)
-- [ ] Data can be retrieved efficiently for batch processing
-- [ ] File-based: Articles organized in `data/YYYY-MM-DD/` folders OR Database: SQLite file in `data/` directory
-- [ ] README.md documents the storage structure and schema
-- [ ] Storage handles special characters and encoding properly (UTF-8)
-- [ ] `load_articles()` function returns data in consistent format (list of dictionaries)
+- [x] Storage mechanism successfully saves all article fields (unique_id, url, date, headline, body)
+- [x] No duplicate articles can be stored (enforced by unique_id or URL)
+- [x] Data can be retrieved efficiently for batch processing
+- [x] File-based: Articles organized in `data/YYYY-MM-DD/` folders OR Database: SQLite file in `data/` directory
+- [x] README.md documents the storage structure and schema
+- [x] Storage handles special characters and encoding properly (UTF-8)
+- [x] `load_articles()` function returns data in consistent format (list of dictionaries)
 
 ---
 
@@ -551,6 +551,7 @@ All plots should be saved in `results/` folder with descriptive filenames.
 ## Summary
 
 **Total Issues:** 11 (10 required + 1 optional)
+**Completed Issues:** Issue #1, Issue #2, Issue #3
 
 **Project Timeline:**
 1. Setup & Foundation (Issues #1, #4)
