@@ -205,15 +205,15 @@ Since NER works best on original text (not preprocessed), apply minimal cleaning
 - Console output: "Detected X companies which are company_1, company_2, ..."
 
 ### Acceptance Criteria
-- [ ] spaCy model loads successfully on script execution
-- [ ] `detect_entities()` correctly identifies ORG entities in text
-- [ ] Function filters out non-ORG entities (PERSON, GPE, DATE, etc.)
-- [ ] Duplicate organizations are removed (case-insensitive deduplication)
-- [ ] Both headline and body are processed for entity extraction
-- [ ] Returns empty list when no organizations detected
-- [ ] Console output matches specified format
-- [ ] Function handles long articles efficiently (no performance issues)
-- [ ] Code includes example usage and docstrings
+- [x] spaCy model loads successfully on script execution
+- [x] `detect_entities()` correctly identifies ORG entities in text
+- [x] Function filters out non-ORG entities (PERSON, GPE, DATE, etc.)
+- [x] Duplicate organizations are removed (case-insensitive deduplication)
+- [x] Both headline and body are processed for entity extraction
+- [x] Returns empty list when no organizations detected
+- [x] Console output matches specified format
+- [x] Function handles long articles efficiently (no performance issues)
+- [x] Code includes example usage and docstrings
 
 ---
 
