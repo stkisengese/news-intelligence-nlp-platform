@@ -2,6 +2,7 @@ import json
 import os
 import pandas as pd
 from entity_detection import load_spacy_model, extract_organizations
+from topic_classification import classify_article
 
 def load_articles_from_data(data_dir='data'):
     """
@@ -35,8 +36,7 @@ def main():
         
         # ---------- Topic detection ----------
         print("---------- Topic detection ----------")
-        # TODO: Implement topic detection
-        topic = "Not implemented"
+        topic = classify_article(article['headline'], article['body'])
         print(f"The topic of the article is: {topic}")
         
         # ---------- Sentiment analysis ----------
