@@ -72,3 +72,16 @@ The model achieves an accuracy of over 95% on the test set. The following table 
 The learning curves for the model are shown below. The plot shows that the model does not overfit and that the training and cross-validation scores converge.
 
 ![Learning Curves](results/learning_curves.png)
+
+## Sentiment Analysis
+
+Sentiment analysis is performed using NLTK's VADER (Valence Aware Dictionary and sEntiment Reasoner), a pre-trained model optimized for news and social media text.
+
+### Methodology
+
+VADER is effective without extensive preprocessing because it considers punctuation (e.g., "!") and capitalization (e.g., "GREAT") in its sentiment calculations. The `sentiment_analysis.py` module combines the article's headline and body to get a holistic view of its sentiment.
+
+The sentiment is classified based on the `compound` score returned by VADER:
+- **Positive:** `compound score >= 0.05`
+- **Neutral:** `compound score > -0.05` and `compound score < 0.05`
+- **Negative:** `compound score <= -0.05`
