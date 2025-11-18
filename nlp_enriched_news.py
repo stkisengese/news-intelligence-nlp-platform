@@ -3,6 +3,7 @@ import os
 import pandas as pd
 from entity_detection import load_spacy_model, extract_organizations
 from topic_classification import classify_article
+from sentiment_analysis import analyze_and_classify_article_sentiment
 
 def load_articles_from_data(data_dir='data'):
     """
@@ -41,9 +42,8 @@ def main():
         
         # ---------- Sentiment analysis ----------
         print("---------- Sentiment analysis ----------")
-        # TODO: Implement sentiment analysis
-        sentiment = "Not implemented"
-        print(f"The article {article['headline']} has a {sentiment} sentiment")
+        compound_score, sentiment_classification = analyze_and_classify_article_sentiment(article['headline'], article['body'])
+        print(f"The article {article['headline']} has a {sentiment_classification} sentiment")
         
         # ---------- Scandal detection ----------
         print("---------- Scandal detection ----------")
@@ -59,7 +59,7 @@ def main():
             'body': article['body'],
             'org': organizations,
             'topics': [topic],
-            'sentiment': sentiment,
+            'sentiment': compound_score,
             'scandal_distance': scandal_score,
             'top_10': False # To be implemented
         }
