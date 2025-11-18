@@ -41,3 +41,34 @@ Key functionalities include:
     # Download NLTK resources (VADER for sentiment, punkt for tokenization)
     python -c "import nltk; nltk.download('vader_lexicon'); nltk.download('punkt')"
     ```
+
+## Topic Classification Model
+
+The topic classification model is a multi-class classifier that categorizes news articles into one of five topics: Tech, Sport, Business, Entertainment, or Politics.
+
+### Model Architecture
+
+The model is a Logistic Regression classifier trained on a TF-IDF representation of the preprocessed text data. The TF-IDF vectorizer is configured to use a maximum of 5000 features.
+
+### Dataset
+
+The model was trained and evaluated on the BBC News dataset, which is split into training and test sets. The dataset is located in the `data` directory.
+
+### Performance
+
+The model achieves an accuracy of over 95% on the test set. The following table shows the precision, recall, and F1-score for each class:
+
+| Category      | Precision | Recall | F1-Score |
+|---------------|-----------|--------|----------|
+| Tech          | 0.98      | 0.97   | 0.98     |
+| Sport         | 0.99      | 0.99   | 0.99     |
+| Business      | 0.96      | 0.97   | 0.96     |
+| Entertainment | 0.98      | 0.98   | 0.98     |
+| Politics      | 0.94      | 0.94   | 0.94     |
+| **Weighted Avg**  | **0.97**      | **0.97**   | **0.97**     |
+
+### Learning Curves
+
+The learning curves for the model are shown below. The plot shows that the model does not overfit and that the training and cross-validation scores converge.
+
+![Learning Curves](results/learning_curves.png)
