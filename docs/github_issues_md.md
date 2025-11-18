@@ -249,17 +249,16 @@ Implementation steps:
   - `predict_topic(text)`
   - `classify_article(headline, body)`
 
-### Acceptance Criteria
-- [ ] Training script loads and preprocesses labeled dataset
-- [ ] Text vectorization implemented (CountVectorizer or TF-IDF)
-- [ ] Model achieves >95% accuracy on test set
-- [ ] Learning curves plot saved showing train/validation performance
-- [ ] Learning curves demonstrate no overfitting (curves converge)
-- [ ] Model serialized successfully with pickle
-- [ ] `predict_topic()` function loads model and returns topic label
-- [ ] Console output: "The topic of the article is: <topic>"
-- [ ] README.md updated with model architecture and performance metrics
-- [ ] Training script is reproducible (random seed set)
+- [x] Training script loads and preprocesses labeled dataset
+- [x] Text vectorization implemented using TF-IDF
+- [x] Model achieves >95% accuracy on test set
+- [x] Learning curves plot saved showing train/validation performance
+- [x] Learning curves demonstrate no overfitting (curves converge)
+- [x] Model serialized successfully with pickle
+- [x] `predict_topic()` function loads model and returns topic label
+- [x] Console output: "The topic of the article is: <topic>"
+- [x] README.md updated with model architecture and performance metrics
+- [x] Training script is reproducible (random seed set)
 
 ---
 
