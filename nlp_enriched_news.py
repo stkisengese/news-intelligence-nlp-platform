@@ -2,7 +2,7 @@ import json
 import os
 import pandas as pd
 from entity_detection import load_spacy_model, extract_organizations
-from topic_classification import classify_article
+from topic_classification import classify_article, load_topic_model
 from sentiment_analysis import analyze_and_classify_article_sentiment
 from scandal_detection import load_embedding_model, detect_scandal
 
@@ -25,6 +25,7 @@ def main():
     nlp_model = load_spacy_model()
     embedding_model = load_embedding_model()
     articles = load_articles_from_data()
+    model, vectorizer = load_topic_model()
     
     enriched_data = []
     
@@ -37,7 +38,7 @@ def main():
         
         # ---------- Topic detection ----------
         print("---------- Topic detection ----------")
-        topic = classify_article(article['headline'], article['body'])
+        topic = classify_article(article['headline'], article['body'], model, vectorizer)
         print(f"The topic of the article is: {topic}")
         
         # ---------- Sentiment analysis ----------
