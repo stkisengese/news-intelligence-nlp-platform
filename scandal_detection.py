@@ -42,3 +42,21 @@ def define_disaster_keywords():
         "environmental negligence",
         "gas leak"
     ]
+
+def extract_entity_sentences(text, entities):
+    """Extracts sentences from the text that contain any of the given entities.
+
+    Args:
+        text (str): The text to extract sentences from.
+        entities (list): A list of entities to look for.
+
+    Returns:
+        list: A list of sentences containing the entities.
+    """
+    sentences = []
+    for sentence in text.split('.'):
+        for entity in entities:
+            if entity in sentence:
+                sentences.append(sentence)
+                break
+    return sentences
