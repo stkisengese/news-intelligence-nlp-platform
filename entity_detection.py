@@ -35,7 +35,7 @@ def detect_entities(text, nlp, entity_type='ORG'):
     entities = [ent.text for ent in doc.ents if ent.label_ == entity_type]
     return entities
 
-def extract_organizations(headline, body, nlp):
+def extract_organizations(headline, body):
     """
     Extract a deduplicated list of organizations from the headline and body of an article.
     
@@ -47,6 +47,9 @@ def extract_organizations(headline, body, nlp):
     Returns:
         list: A deduplicated list of organization names.
     """
+    # Load spaCy model
+    nlp = load_spacy_model()
+
     headline_orgs = detect_entities(headline, nlp, entity_type='ORG')
     body_orgs = detect_entities(body, nlp, entity_type='ORG')
     
@@ -59,11 +62,9 @@ def extract_organizations(headline, body, nlp):
 
 if __name__ == '__main__':
     # Example Usage
-    nlp_model = load_spacy_model()
-    
     example_headline = "Apple and Google announce new partnership."
     example_body = "The new partnership between Apple Inc. and Google LLC will focus on developing new AI technologies. Other companies like Microsoft are also watching closely."
     
-    organizations = extract_organizations(example_headline, example_body, nlp_model)
+    organizations = extract_organizations(example_headline, example_body)
     
     print(f"Detected {len(organizations)} companies which are {', '.join(organizations)}")
