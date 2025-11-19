@@ -291,15 +291,15 @@ VADER requires minimal preprocessing since it considers punctuation and capitali
 - Console output: "The article <title> has a <sentiment> sentiment"
 
 ### Acceptance Criteria
-- [ ] NLTK VADER lexicon is downloaded and loaded successfully
-- [ ] `analyze_sentiment()` returns dictionary with compound, pos, neg, neu scores
-- [ ] `get_article_sentiment()` processes both headline and body appropriately
-- [ ] Sentiment classification thresholds correctly implemented (≥0.05, ≤-0.05)
-- [ ] Function handles empty or very short text gracefully
-- [ ] Console output matches specified format
-- [ ] README.md documents sentiment analysis approach and VADER choice rationale
-- [ ] Code includes example usage with sample texts
-- [ ] Returns consistent data structure (dict or float) for downstream processing
+- [x] NLTK VADER lexicon is downloaded and loaded successfully
+- [x] `analyze_sentiment()` returns dictionary with compound, pos, neg, neu scores
+- [x] `get_article_sentiment()` processes both headline and body appropriately
+- [x] Sentiment classification thresholds correctly implemented (≥0.05, ≤-0.05)
+- [x] Function handles empty or very short text gracefully
+- [x] Console output matches specified format
+- [x] README.md documents sentiment analysis approach and VADER choice rationale
+- [x] Code includes example usage with sample texts
+- [x] Returns consistent data structure (dict or float) for downstream processing
 
 ---
 
@@ -339,16 +339,16 @@ Implementation approach:
   - Keyword selection rationale
 
 ### Acceptance Criteria
-- [ ] Keyword list contains at least 15 relevant environmental disaster terms
-- [ ] Keywords are specific and non-ambiguous
-- [ ] Embedding model loads successfully (sentence-transformers recommended)
-- [ ] Sentences containing organizations are extracted correctly
-- [ ] Similarity scores calculated between keywords and sentences
-- [ ] Article-level scandal score aggregated (e.g., max, mean, or weighted average)
-- [ ] Top 10 articles with highest scores identified
-- [ ] Console output shows entities with detected scandals
-- [ ] README.md includes thorough explanation of approach
-- [ ] Code includes comments explaining similarity calculation
+- [x] Keyword list contains at least 15 relevant environmental disaster terms
+- [x] Keywords are specific and non-ambiguous
+- [x] Embedding model loads successfully (sentence-transformers recommended)
+- [x] Sentences containing organizations are extracted correctly
+- [x] Similarity scores calculated between keywords and sentences
+- [x] Article-level scandal score aggregated (e.g., max, mean, or weighted average)
+- [x] Top 10 articles with highest scores identified
+- [x] Console output shows entities with detected scandals
+- [x] README.md includes thorough explanation of approach
+- [x] Code includes comments explaining similarity calculation
 
 ---
 
