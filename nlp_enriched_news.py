@@ -4,6 +4,7 @@ import pandas as pd
 from entity_detection import load_spacy_model, extract_organizations
 from topic_classification import classify_article
 from sentiment_analysis import analyze_and_classify_article_sentiment
+from scandal_detection import load_embedding_model, detect_scandal
 
 def load_articles_from_data(data_dir='data'):
     """
@@ -21,7 +22,7 @@ def main():
     """
     Main function to run the NLP enrichment pipeline.
     """
-    nlp_model = load_spacy_model()
+    embedding_model = load_embedding_model()
     articles = load_articles_from_data()
     
     enriched_data = []
@@ -32,7 +33,7 @@ def main():
         print(f"Enriching {article['url']}:")
         
         # ---------- Detect entities ----------
-        organizations = extract_organizations(article['headline'], article['body'], nlp_model)
+        organizations = extract_organizations(article['headline'], article['body'])
         print(f"Detected {len(organizations)} companies which are {', '.join(organizations)}")
         
         # ---------- Topic detection ----------
@@ -47,8 +48,7 @@ def main():
         
         # ---------- Scandal detection ----------
         print("---------- Scandal detection ----------")
-        # TODO: Implement scandal detection
-        scandal_score = 0.0
+        scandal_score = detect_scandal(article['body'], organizations, embedding_model)
         print("Computing embeddings and distance ...")
         
         enriched_article = {
