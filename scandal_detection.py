@@ -60,3 +60,27 @@ def extract_entity_sentences(text, entities):
                 sentences.append(sentence)
                 break
     return sentences
+
+def compute_embeddings(texts, model):
+    """Computes embeddings for a list of texts.
+
+    Args:
+        texts (list): A list of texts to embed.
+        model (SentenceTransformer): The sentence-transformer model to use.
+
+    Returns:
+        np.ndarray: The computed embeddings.
+    """
+    return model.encode(texts)
+
+def calculate_similarity_scores(keyword_embeddings, sentence_embeddings):
+    """Calculates the cosine similarity between keyword and sentence embeddings.
+
+    Args:
+        keyword_embeddings (np.ndarray): The embeddings of the disaster keywords.
+        sentence_embeddings (np.ndarray): The embeddings of the sentences.
+
+    Returns:
+        np.ndarray: The cosine similarity scores.
+    """
+    return cosine_similarity(keyword_embeddings, sentence_embeddings)
