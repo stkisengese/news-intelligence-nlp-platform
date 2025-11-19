@@ -1,5 +1,3 @@
-# sentiment_analysis.py
-
 import nltk
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
