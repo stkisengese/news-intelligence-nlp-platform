@@ -28,8 +28,6 @@ def main():
     enriched_data = []
     
     for i, article in enumerate(articles):
-        if i >= 10:
-            break
         print(f"Enriching {article['url']}:")
         
         # ---------- Detect entities ----------
@@ -61,9 +59,14 @@ def main():
             'topics': [topic],
             'sentiment': compound_score,
             'scandal_distance': scandal_score,
-            'top_10': False # To be implemented
+            'top_10': False
         }
         enriched_data.append(enriched_article)
+
+    # Flag top 10 articles with highest scandal scores
+    enriched_data.sort(key=lambda x: x['scandal_distance'], reverse=True)
+    for i in range(min(10, len(enriched_data))):
+        enriched_data[i]['top_10'] = True
         
     df = pd.DataFrame(enriched_data)
     df.to_csv('results/enhanced_news.csv', index=False)
