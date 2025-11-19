@@ -22,16 +22,17 @@ def main():
     """
     Main function to run the NLP enrichment pipeline.
     """
+    nlp_model = load_spacy_model()
     embedding_model = load_embedding_model()
     articles = load_articles_from_data()
     
     enriched_data = []
     
-    for i, article in enumerate(articles):
+    for article in articles:
         print(f"Enriching {article['url']}:")
         
         # ---------- Detect entities ----------
-        organizations = extract_organizations(article['headline'], article['body'])
+        organizations = extract_organizations(article['headline'], article['body'], nlp_model)
         print(f"Detected {len(organizations)} companies which are {', '.join(organizations)}")
         
         # ---------- Topic detection ----------
