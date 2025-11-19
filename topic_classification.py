@@ -38,19 +38,34 @@ def predict_topic(text, model, vectorizer):
     prediction = model.predict(text_vector)
     return prediction[0]
 
-def classify_article(headline, body):
+def classify_article(headline, body, model, vectorizer):
     """
     Classifies an article into a topic based on its headline and body.
     
     Args:
         headline (str): The headline of the article.
         body (str): The body of the article.
+        model: The trained topic classification model.
+        vectorizer: The fitted TF-IDF vectorizer.
         
     Returns:
         The predicted topic label.
     """
-    model, vectorizer = load_topic_model()
     if model and vectorizer:
         text = headline + " " + body
         return predict_topic(text, model, vectorizer)
     return None
+
+if __name__ == '__main__':
+    model, vectorizer = load_topic_model()
+    if model and vectorizer:
+        # Example Usage
+        headline = "New iPhone released with AI features"
+        body = "Apple announced its latest iPhone with advanced artificial intelligence capabilities and improved camera."
+        topic = classify_article(headline, body, model, vectorizer)
+        print(f"The topic of the article is: {topic}")
+
+        headline_2 = "Manchester United wins the Premier League"
+        body_2 = "In a thrilling final match, Manchester United secured the Premier League title with a last-minute goal."
+        topic_2 = classify_article(headline_2, body_2, model, vectorizer)
+        print(f"The topic of the article is: {topic_2}")
