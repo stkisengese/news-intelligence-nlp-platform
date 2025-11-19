@@ -85,3 +85,28 @@ The sentiment is classified based on the `compound` score returned by VADER:
 - **Positive:** `compound score >= 0.05`
 - **Neutral:** `compound score > -0.05` and `compound score < 0.05`
 - **Negative:** `compound score <= -0.05`
+
+## Scandal Detection
+
+Scandal detection is implemented to identify articles that report on environmental disasters linked to specific companies. This system uses semantic similarity to connect organizations with ESG (Environmental, Social, and Governance) risk-related keywords.
+
+### Methodology
+
+The process involves the following steps:
+1.  **Keyword Definition**: A predefined list of keywords and phrases related to environmental disasters (e.g., "oil spill," "deforestation," "emissions scandal") is maintained.
+2.  **Entity-Sentence Extraction**: For each article, the system extracts sentences that contain the names of organizations identified by the NER module.
+3.  **Embedding Generation**: The predefined disaster keywords and the extracted entity-sentences are converted into high-dimensional vectors using a sentence-transformer model.
+4.  **Similarity Calculation**: The cosine similarity is computed between the keyword embeddings and the sentence embeddings. A high similarity score indicates a potential link between a company and a disaster event.
+5.  **Scandal Scoring**: The similarity scores are aggregated to produce a final "scandal score" for the article. This score reflects the likelihood that the article is reporting on an environmental scandal.
+
+### Embedding Model
+
+The system uses the `all-MiniLM-L6-v2` sentence-transformer model. This model is chosen for its efficiency and strong performance on semantic similarity tasks. It maps sentences and paragraphs to a 384-dimensional dense vector space and is ideal for clustering or semantic search.
+
+### Similarity Metric
+
+**Cosine Similarity** is used to measure the semantic distance between the disaster keywords and the article sentences. This metric is well-suited for high-dimensional spaces and effectively captures the contextual closeness of the texts, regardless of their length.
+
+### Keyword Selection
+
+The disaster keywords were carefully selected to be specific and unambiguous to minimize false positives. The list includes terms that are strongly associated with environmental incidents and corporate malfeasance. The keywords are regularly reviewed and updated to ensure relevance.
