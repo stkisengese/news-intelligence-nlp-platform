@@ -37,7 +37,8 @@ def detect_entities(text, nlp, entity_type='ORG'):
 
 def extract_organizations(headline, body, nlp):
     """
-    Extract a deduplicated list of organizations from the headline and body of an article.
+    Extract a deduplicated list of organizations from the headline and body of an article,
+    filtering out the news source itself (e.g., 'BBC').
     
     Args:
         headline (str): The headline of the article.
@@ -52,8 +53,11 @@ def extract_organizations(headline, body, nlp):
     
     all_orgs = headline_orgs + body_orgs
     
+    # Filter out the news source ('BBC') and its variants by checking for containment
+    filtered_orgs = [org for org in all_orgs if 'bbc' not in org.lower()]
+    
     # Deduplicate the list of organizations (case-insensitive)
-    deduplicated_orgs = list(set([org.strip() for org in all_orgs]))
+    deduplicated_orgs = list(set([org.strip() for org in filtered_orgs]))
     
     return deduplicated_orgs
 
