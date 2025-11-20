@@ -1,7 +1,7 @@
 # NLP-enriched News Intelligence Platform
 A Python-based NLP platform for scraping, analyzing, and enriching news articles with entity detection, topic classification, sentiment analysis, and scandal detection. Designed to help analysts extract actionable insights from large volumes of news data.
 
-## 📰 Project Overview
+## Project Overview
 The goal of this project is to build an advanced platform for News Intelligence. It connects to a news data source and uses various Natural Language Processing (NLP) techniques to enrich the articles.
 
 Key functionalities include:
@@ -10,7 +10,7 @@ Key functionalities include:
 3. **Sentiment Analysis:** Determining article sentiment (Positive/Negative/Neutral) using a pre-trained NLTK model.
 4. **Scandal Detection:** Flagging potential environmental disaster risks by calculating the semantic distance between article sentences and defined keywords using embeddings.
 
-## 🚀 Setup Instructions
+## Setup Instructions
 
 1. **Clone the repository:**
    ```bash
@@ -41,6 +41,81 @@ Key functionalities include:
     # Download NLTK resources (VADER for sentiment, punkt for tokenization)
     python -c "import nltk; nltk.download('vader_lexicon'); nltk.download('punkt')"
     ```
+
+## Architecture
+The platform is designed with a modular architecture, where each NLP task is encapsulated within its own module. The data flow is sequential, starting from data acquisition (scraping) and proceeding through various NLP enrichment stages before culminating in an analytics and visualization phase.
+
+1.  **Data Acquisition (`scraper_news.py`)**: Responsible for collecting raw news articles from specified sources.
+2.  **NLP Enrichment (`nlp_enriched_news.py`)**: Orchestrates the application of various NLP techniques to the raw articles:
+    *   **Entity Detection (`entity_detection.py`)**: Identifies key organizations mentioned.
+    *   **Topic Classification (`topic_classification.py`)**: Categorizes articles by their primary subject matter.
+    *   **Sentiment Analysis (`sentiment_analysis.py`)**: Determines the emotional tone of the articles.
+    *   **Scandal Detection (`scandal_detection.py`)**: Flags articles related to environmental disasters and specific entities.
+3.  **Data Persistence**: Enriched data is stored in a structured format (`enhanced_news.csv`).
+4.  **Source Analysis (`source_analysis.py`)**: Processes the enriched data to generate analytical insights and visualizations.
+
+## Usage Guide
+To run the full news intelligence pipeline, follow these steps in your activated Python environment (`news-nlp-env` if using conda, or `.venv` for venv):
+
+1.  **Train Topic Classification Model (if not already trained):**
+    If you need to train or retrain the topic classification model, run the `training_model.py` script. This will generate `results/topic_classifier.pkl` and `results/learning_curves.png`.
+    ```bash
+    python results/training_model.py
+    ```
+
+2.  **Scrape News Articles (Optional - if you need fresh data):**
+    If you need to collect fresh news data, run the scraper. By default, it scrapes a predefined source and saves articles to the `data/` directory.
+    ```bash
+    python scraper_news.py
+    ```
+    *Note: Ensure `scraper_news.py` is configured with a working news source URL.*
+
+3.  **Enrich News Articles with NLP:**
+    Process the scraped articles through the NLP pipeline to detect entities, classify topics, analyze sentiment, and detect potential scandals. This will generate `results/enhanced_news.csv`.
+    ```bash
+    python nlp_enriched_news.py
+    ```
+
+4.  **Generate Source Analysis Visualizations:**
+    Create a series of plots and charts based on the enriched data to gain insights into the news source's coverage. These will be saved in the `results/img/` directory.
+    ```bash
+    python source_analysis.py
+    ```
+
+## Project Structure
+The project follows a logical and modular structure:
+
+```
+news-intelligence-nlp-platform/
+├── data/
+│   └── [scraped_articles.jsonl]  # Raw scraped news articles
+├── docs/
+│   └── github_issues_md.md       # GitHub issues documentation
+│   └── instructions.md           # Project instructions
+│   └── nlp_news_prd.md           # Product requirements document
+├── results/
+│   ├── img/                      # Directory for generated image plots
+│   │   ├── learning_curves.png   # Plot of model learning curves
+│   │   ├── articles_per_day.png  # Plot: Number of articles published per day
+│   │   ├── companies_per_day.png # Plot: Number of unique companies mentioned per day
+│   │   ├── sentiment_per_company.png # Plot: Average sentiment for top companies
+│   │   ├── sentiment_per_day.png # Plot: Positive and Negative sentiment counts per day
+│   │   ├── top_companies.png     # Plot: Top N most mentioned companies
+│   │   └── topic_distribution.png# Plot: Overall topic distribution
+│   ├── topic_classifier.pkl      # Serialized topic classification model
+│   └── training_model.py         # Script used to train the topic model
+├── .gitignore                    # Git ignore file
+├── entity_detection.py           # Module for Named Entity Recognition
+├── LICENSE                       # Project license
+├── nlp_enriched_news.py          # Main script for NLP pipeline orchestration
+├── README.md                     # Project documentation (this file)
+├── requirements.txt              # Python dependency list
+├── scandal_detection.py          # Module for environmental scandal detection
+├── scraper_news.py               # Module for web scraping news articles
+├── sentiment_analysis.py         # Module for sentiment analysis
+├── topic_classification.py       # Module for topic classification
+└── source_analysis.py            # Module for generating analytical insights and visualizations
+```
 
 ## Topic Classification Model
 
@@ -111,11 +186,11 @@ The system uses the `all-MiniLM-L6-v2` sentence-transformer model. This model is
 
 The disaster keywords were carefully selected to be specific and unambiguous to minimize false positives. The list includes terms that are strongly associated with environmental incidents and corporate malfeasance. The keywords are regularly reviewed and updated to ensure relevance.
 
-## Source Analysis
+## Source Analysis Module
 
 The `source_analysis.py` module is an analytics component designed to generate high-level insights from the entire collection of enriched news articles. After the main NLP pipeline has processed the articles and produced the `enhanced_news.csv` dataset, this module aggregates the data to reveal temporal patterns, entity trends, and topic distributions.
 
-The module produces a series of visualizations, which are saved in the `results/` directory. These plots provide a macroscopic view of the news source's coverage and focus over time.
+The module produces a series of visualizations, which are saved in the `results/img/` directory. These plots provide a macroscopic view of the news source's coverage and focus over time.
 
 ### Generated Visualizations and Insights
 
@@ -160,11 +235,10 @@ The module produces a series of visualizations, which are saved in the `results/
      
     ![Average Sentiment for Top Companies](results/img/sentiment_per_company.png)
 
-## Future improvements
-
-- **Expand News Sources**: Integrate more news sources to diversify data collection and provide a broader perspective.                                                      
-- **Advanced Entity Resolution**: Implement more sophisticated entity linking and disambiguation to improve the accuracy of organization mentions (e.g., distinguishing   between "Apple Inc." and "Apple Corps").
-- **Real-time Processing**: Develop a streaming architecture to process news articles   in real-time, providing immediate insights.
-- **Interactive Dashboards**: Create interactive web dashboards using tools like Dash   or Streamlit for more dynamic exploration of the analyzed data. 
+## Future Improvements
+- **Expand News Sources**: Integrate more news sources to diversify data collection and provide a broader perspective.
+- **Advanced Entity Resolution**: Implement more sophisticated entity linking and disambiguation to improve the accuracy of organization mentions (e.g., distinguishing between "Apple Inc." and "Apple Corps").
+- **Real-time Processing**: Develop a streaming architecture to process news articles in real-time, providing immediate insights.
+- **Interactive Dashboards**: Create interactive web dashboards using tools like Dash or Streamlit for more dynamic exploration of the analyzed data.
 - **Customizable Scandal Detection**: Allow users to define custom keywords and thresholds for scandal detection, tailoring the system to specific areas of interest.
 - **Automated Alerting**: Implement a system to send automated alerts for critical events, such as a sudden spike in negative sentiment for a key company or a detected scandal.
