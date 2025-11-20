@@ -1,6 +1,6 @@
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
-from entity_detection import extract_organizations
+from utils.entity_detection import extract_organizations
 import numpy as np
 
 def load_embedding_model(model_name='all-MiniLM-L6-v2'):

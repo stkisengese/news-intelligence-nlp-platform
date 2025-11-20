@@ -1,7 +1,7 @@
 import pickle
 import sys
 sys.path.append('..')
-from results.training_model import preprocess
+from results.img.training_model import preprocess
 
 def load_topic_model(results_path='results'):
     """
