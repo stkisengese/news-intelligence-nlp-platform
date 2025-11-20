@@ -159,3 +159,12 @@ The module produces a series of visualizations, which are saved in the `results/
     “Instagram”’s negative score may reflect coverage of controversies (e.g., privacy, mental health).
      
     ![Average Sentiment for Top Companies](results/img/sentiment_per_company.png)
+
+## Future improvements
+
+- **Expand News Sources**: Integrate more news sources to diversify data collection and provide a broader perspective.                                                      
+- **Advanced Entity Resolution**: Implement more sophisticated entity linking and disambiguation to improve the accuracy of organization mentions (e.g., distinguishing   between "Apple Inc." and "Apple Corps").
+- **Real-time Processing**: Develop a streaming architecture to process news articles   in real-time, providing immediate insights.
+- **Interactive Dashboards**: Create interactive web dashboards using tools like Dash   or Streamlit for more dynamic exploration of the analyzed data. 
+- **Customizable Scandal Detection**: Allow users to define custom keywords and thresholds for scandal detection, tailoring the system to specific areas of interest.
+- **Automated Alerting**: Implement a system to send automated alerts for critical events, such as a sudden spike in negative sentiment for a key company or a detected scandal.
