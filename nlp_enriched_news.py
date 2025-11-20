@@ -1,10 +1,9 @@
 import json
-import os
 import pandas as pd
-from entity_detection import load_spacy_model, extract_organizations
-from topic_classification import classify_article, load_topic_model
-from sentiment_analysis import analyze_and_classify_article_sentiment
-from scandal_detection import load_embedding_model, detect_scandal
+from utils.entity_detection import load_spacy_model, extract_organizations
+from utils.topic_classification import classify_article, load_topic_model
+from utils.sentiment_analysis import analyze_and_classify_article_sentiment
+from utils.scandal_detection import load_embedding_model, detect_scandal
 
 # Define ANSI color codes
 COLOR_GREEN = '\033[92m'
