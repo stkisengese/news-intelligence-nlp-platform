@@ -93,7 +93,7 @@ def configure_date_axis():
     plt.xticks(rotation=45, ha="right")
 
 
-def plot_articles_per_day(df, output="results/articles_per_day.png"):
+def plot_articles_per_day(df, output="results/img/articles_per_day.png"):
     counts = df.groupby("day").size()
 
     plt.figure()
@@ -108,7 +108,7 @@ def plot_articles_per_day(df, output="results/articles_per_day.png"):
     print(f"Saved: {output}")
 
 
-def plot_topics_per_day(df, output="results/topics_per_day.png"):
+def plot_topics_per_day(df, output="results/img/topics_per_day.png"):
     exploded = df.explode("topics")
     pivot = exploded.groupby(["day", "topics"]).size().unstack(fill_value=0)
 
@@ -124,7 +124,7 @@ def plot_topics_per_day(df, output="results/topics_per_day.png"):
     print(f"Saved: {output}")
 
 
-def plot_companies_per_day(df, output="results/companies_per_day.png"):
+def plot_companies_per_day(df, output="results/img/companies_per_day.png"):
     df["org"] = df["org"].apply(normalize_organizations)
     exploded = df.explode("org")
     counts = exploded.groupby("day")["org"].nunique()
@@ -141,7 +141,7 @@ def plot_companies_per_day(df, output="results/companies_per_day.png"):
     print(f"Saved: {output}")
 
 
-def plot_sentiment_per_day(df, output="results/sentiment_per_day.png"):
+def plot_sentiment_per_day(df, output="results/img/sentiment_per_day.png"):
     df["sentiment_label"] = df["sentiment"].apply(classify_sentiment)
 
     pivot = df.groupby(["day", "sentiment_label"]).size().unstack(fill_value=0)
@@ -159,7 +159,7 @@ def plot_sentiment_per_day(df, output="results/sentiment_per_day.png"):
     print(f"Saved: {output}")
 
 
-def plot_top_companies(df, output="results/top_companies.png", top_n=20):
+def plot_top_companies(df, output="results/img/top_companies.png", top_n=20):
     df["org"] = df["org"].apply(normalize_organizations)
     exploded = df.explode("org")
     exploded = exploded[exploded["org"].str.strip() != ""]
@@ -176,7 +176,7 @@ def plot_top_companies(df, output="results/top_companies.png", top_n=20):
     print(f"Saved: {output}")
 
 
-def plot_sentiment_per_company(df, output="results/sentiment_per_company.png", top_n=10):
+def plot_sentiment_per_company(df, output="results/img/sentiment_per_company.png", top_n=10):
     df["org"] = df["org"].apply(normalize_organizations)
     exploded = df.explode("org")
 
@@ -195,7 +195,7 @@ def plot_sentiment_per_company(df, output="results/sentiment_per_company.png", t
     print(f"Saved: {output}")
 
 
-def plot_topic_distribution(df, output="results/topic_distribution.png"):
+def plot_topic_distribution(df, output="results/img/topic_distribution.png"):
     exploded = df.explode("topics")
     counts = exploded["topics"].value_counts()
 
@@ -224,8 +224,8 @@ def plot_topic_distribution(df, output="results/topic_distribution.png"):
 # MAIN ENTRY
 # ------------------------------------------------------------
 def main():
-    if not os.path.exists("results"):
-        os.makedirs("results")
+    if not os.path.exists("results/img"):
+        os.makedirs("results/img")
 
     df = load_enriched_data()
     if df is None:
