@@ -110,3 +110,52 @@ The system uses the `all-MiniLM-L6-v2` sentence-transformer model. This model is
 ### Keyword Selection
 
 The disaster keywords were carefully selected to be specific and unambiguous to minimize false positives. The list includes terms that are strongly associated with environmental incidents and corporate malfeasance. The keywords are regularly reviewed and updated to ensure relevance.
+
+## Source Analysis
+
+The `source_analysis.py` module is an analytics component designed to generate high-level insights from the entire collection of enriched news articles. After the main NLP pipeline has processed the articles and produced the `enhanced_news.csv` dataset, this module aggregates the data to reveal temporal patterns, entity trends, and topic distributions.
+
+The module produces a series of visualizations, which are saved in the `results/` directory. These plots provide a macroscopic view of the news source's coverage and focus over time.
+
+### Generated Visualizations and Insights
+
+1.  **Sentiment Counts Per Day** (`sentiment_per_day.png`):
+    -   **Description**: This grouped bar chart displays the total number of positive and negative articles published each day.
+    -   **Insight**: The news source maintains a consistently positive editorial stance, but Nov 17 may indicate a response to breaking negative news (e.g., political scandal, market downturn).
+    ![Sentiment Counts Per Day](results/sentiment_per_day.png)
+
+2.  **Top 20 Most Mentioned Companies** (`top_companies.png`):
+    -   **Description**: A horizontal bar chart that ranks the top 20 most frequently mentioned organizations across all articles.
+    -   **Insight**: Coverage is heavily skewed toward political figures and tech giants. The presence of “AI” as #4 indicates rising thematic focus on artificial intelligence.
+    ![Top 20 Most Mentioned Companies](results/top_companies.png)
+
+3.  **Overall Topic Distribution** (`topic_distribution.png`):
+    -   **Description**: The news source prioritizes business and sports, followed by politics. The low tech percentage despite high AI mentions suggests tech topics are embedded within business or politics stories, not classified separately. 
+    -   **Insight**: This provides a snapshot of the news source's primary areas of focus, revealing the proportion of coverage dedicated to each topic.
+    ![Overall Topic Distribution](results/topic_distribution.png)
+
+4.  **Proportion of Topics Per Day** (`topics_per_day.png`):
+    -   **Description**: A stacked bar chart illustrating how the distribution of topics changes on a daily basis.
+    -   **Insight**:     Nov 17’s political surge correlates with peak negative sentiment and unique company diversity — suggesting a major political story drove broader coverage.
+    Business remains the anchor topic, while tech and entertainment show moderate variability.
+     
+    ![Proportion of Topics Per Day](results/topics_per_day.png)
+
+5.  **Number of Articles Published Per Day** (`articles_per_day.png`):
+    -   **Description**: A line chart that tracks the total volume of articles published each day.
+    -   **Insight**:     Publication volume follows a typical weekly pattern: high start (Mon/Tue), dip midweek, plateau late week, drop on Sat/Sun.
+    No correlation between volume and sentiment — even on low-volume days, sentiment ratios remain similar.
+    ![Number of Articles Published Per Day](results/articles_per_day.png)
+
+6.  **Number of Unique Companies Mentioned Per Day** (`companies_per_day.png`):
+    -   **Description**: A line chart displaying the count of distinct companies mentioned in articles each day.
+    -   **Insight**: Nov 17’s surge in unique companies coincides with its peak in negative sentiment — possibly indicating broader investigative reporting or coverage of multiple entities involved in a major event.
+    ![Number of Unique Companies Mentioned Per Day](results/companies_per_day.png)
+
+7.  **Average Sentiment for Top Companies** (`sentiment_per_company.png`):
+    -   **Description**: A horizontal bar chart illustrating the average sentiment score for the top N most mentioned companies.
+    -   **Insight**:     “AI” is portrayed extremely positively — likely due to innovation narratives.
+    “Hamas” is framed negatively, consistent with geopolitical reporting.
+    “Instagram”’s negative score may reflect coverage of controversies (e.g., privacy, mental health).
+     
+    ![Average Sentiment for Top Companies](results/sentiment_per_company.png)
